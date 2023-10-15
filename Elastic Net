@@ -5,7 +5,7 @@ foldid <- sample(1:10, nrow(x), replace = TRUE)
 # step 1
 cv_model_ls <-
   alpha_seq %>%
-  set_names(., .) %>% # 对向量添加names为自身，保证map返回的列表也是有names的
+  set_names(., .) %>% 
   map(function(alpha){
     cv.model <- cv.glmnet(data[,-1], data[,1], family = "binomial", foldid = foldid, alpha = alpha)
     list(
