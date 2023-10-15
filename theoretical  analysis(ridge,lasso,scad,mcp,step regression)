@@ -46,3 +46,36 @@ stepwiseLogit(HeartDisease~BMI+Smoking+AlcoholDrinking+Stroke+PhysicalHealth
               +MentalHealth+DiffWalking+Sex+AgeCategory+Diabetic+GenHealth+PhysicalActivity+
               SleepTime+Asthma+KidneyDisease+SkinCancer,data=data,
               selection="bidirection",select="SL",sle=0.1,sls=0.15)
+# final decision oh the choice of models
+modelall<-glm(HeartDisease~BMI+Smoking+AlcoholDrinking+Stroke+PhysicalHealth
+            +MentalHealth+DiffWalking+Sex+AgeCategory+Diabetic+GenHealth+PhysicalActivity+
+              SleepTime+Asthma+KidneyDisease+SkinCancer,data=data,family = 'binomial')
+modelall
+summary(modelall)
+modelstep<-glm(HeartDisease~Smoking+Stroke+PhysicalHealth
+            +DiffWalking+Sex+AgeCategory+Diabetic,data=data,family = 'binomial')
+modelstep
+summary(modelstep)
+modellasso<-glm(HeartDisease~Smoking+Stroke+PhysicalHealth
+            +DiffWalking+Sex+AgeCategory+Diabetic+GenHealth+
+              Asthma+KidneyDisease+SkinCancer,data=data,family = 'binomial')
+modellasso
+summary(modellasso)
+#########
+attach(data)
+ddist=datadist(data)
+options(datadist='ddist')
+modelalllrm<-lrm(HeartDisease~BMI+Smoking+AlcoholDrinking+Stroke+PhysicalHealth
+              +MentalHealth+DiffWalking+Sex+AgeCategory+Diabetic+GenHealth+PhysicalActivity+
+                SleepTime+Asthma+KidneyDisease+SkinCancer,data=data,x=T,y=T)
+modelalllrm
+summary(modelalllrm)
+modelsteplrm<-lrm(HeartDisease~Smoking+Stroke+PhysicalHealth
+               +DiffWalking+Sex+AgeCategory+Diabetic,data=data,x=T,y=T)
+modelsteplrm
+summary(modelsteplrm)
+modellassolrm<-lrm(HeartDisease~Smoking+Stroke+PhysicalHealth
+                +DiffWalking+Sex+AgeCategory+Diabetic+GenHealth+
+                  Asthma+KidneyDisease+SkinCancer,data=data,x=T,y=T)
+modellassolrm
+summary(modellassolrm)
