@@ -1,0 +1,45 @@
+#参数搜索
+alpha_seq <- seq(0, 1, by = 0.1)
+# 使用10-fold交叉验证，因此将样本分配为10个fold编号
+foldid <- sample(1:10, nrow(x), replace = TRUE)
+# step 1
+#返回结果：
+#cvm:就是这10次交叉验证的错误度量平均值，也就是MSE（平均标准误差）
+#cvsd:10次交叉验证的错误度量标准差
+#lambda:尝试的lambda值
+#index_min:最低错误率模型对应的lambda值
+#index_1se:错误率可接受的最精简模型对应的lambda值
+cv_model_ls <-
+  alpha_seq %>%
+  set_names(., .) %>% # 对向量添加names为自身，保证map返回的列表也是有names的
+  map(function(alpha){
+    cv.model <- cv.glmnet(data[,-1], data[,1], family = "binomial", foldid = foldid, alpha = alpha)
+    list(
+      cvm = cv.model$cvm,
+      cvsd = cv.model$cvsd,
+      lambda = cv.model$lambda,
+      index_min = cv.model$index["min",1],
+      index_1se = cv.model$index["1se",1]
+    )
+  }
+  )
+# step2
+cv_model_ls  %>%
+  map2(names(.), function(model1, alpha){
+    labmda_min <- model$lambda[model$index_min] %>% log
+    labmda_1se <- model$lambda[model$index_1se] %>% log
+    
+    data.frame(x = log(model$lambda),
+               y = model$cvm,
+               std = model$cvsd) %>%
+      ggplot(aes(x = x, y = y)) +
+      geom_point(color = "Red") +
+      geom_errorbar(aes(ymin = y - std, ymax = y + std), color = "gray") +
+      geom_vline(xintercept = c(labmda_min, labmda_1se) , linetype = 3) + 
+      labs(x = expression(paste("Log(", lambda, ")")), y = "Binomial Deviance") +
+      theme_bw() +
+      ggtitle(paste0("alpha: ", alpha ))
+  }) %>%
+  wrap_plots(
+    ncol = 4
+  )
