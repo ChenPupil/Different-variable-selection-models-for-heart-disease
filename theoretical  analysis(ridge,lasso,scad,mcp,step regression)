@@ -1,4 +1,4 @@
-# ridge regression
+## ridge regression
 fit_ridge<-glmnet(x=data[,-1],y=data[,1],family='binomial',alpha=0)
 plot(fit_ridge,xvar='lambda')
 fit_ridge_cv<-cv.glmnet(x=data[,-1],y=data[,1],family='binomial',alpha=0,type.measure='mse')
