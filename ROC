@@ -7,7 +7,6 @@ text(0.3,0.47,"AUC:0.853")
 text(0.3,0.4,"R Squared:0.262")
 text(0.3,0.33,"Brier Score:0.062")
 
-##0.755
 ppstep=predict(modelstep,X=data[,-1])
 pr2=roc(data$HeartDisease~ppstep, aSAH)
 screen(1)
@@ -15,7 +14,7 @@ plot(pr2,col="red",print.thres=TRUE,ylim=c(0,1))
 text(0.3,0.47,"AUC:0.823")
 text(0.3,0.4,"R Squared:0.241")
 text(0.3,0.33,"Brier Score:0.070")
-##0.749
+
 pplasso=predict(modellasso,X=traindata[,-1])
 pr3=roc(data$HeartDisease~pplasso, aSAH)
 screen(2)
