@@ -1,14 +1,8 @@
-#参数搜索
+# Parameter Search
 alpha_seq <- seq(0, 1, by = 0.1)
-# 使用10-fold交叉验证，因此将样本分配为10个fold编号
+# 10-fold Cross-Validation
 foldid <- sample(1:10, nrow(x), replace = TRUE)
 # step 1
-#返回结果：
-#cvm:就是这10次交叉验证的错误度量平均值，也就是MSE（平均标准误差）
-#cvsd:10次交叉验证的错误度量标准差
-#lambda:尝试的lambda值
-#index_min:最低错误率模型对应的lambda值
-#index_1se:错误率可接受的最精简模型对应的lambda值
 cv_model_ls <-
   alpha_seq %>%
   set_names(., .) %>% # 对向量添加names为自身，保证map返回的列表也是有names的
