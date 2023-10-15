@@ -16,9 +16,9 @@ library(tidyverse)
 library(patchwork)
 library(ggthemes)
 library(StepReg)
-# Read Data
+## Read Data
 data<- read_csv("C:/Users/LX/Desktop/heart_2020_cleaned.csv")
-# Data Preprocessing
+## Data Preprocessing
 data$HeartDisease=ifelse(data$HeartDisease=='Yes',1,0)
 data$Smoking=ifelse(data$Smoking=='Yes',1,0)
 data$AlcoholDrinking=ifelse(data$AlcoholDrinking=='Yes',1,0)
