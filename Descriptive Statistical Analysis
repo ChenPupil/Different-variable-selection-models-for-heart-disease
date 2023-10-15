@@ -1,4 +1,4 @@
-# To create a correlation coefficient plot
+## To create a correlation coefficient plot
 data$BMI=scale(data$BMI, center = TRUE, scale = TRUE)
 data$PhysicalHealth=scale(data$PhysicalHealth, center = TRUE, scale = TRUE)
 data$MentalHealth=scale(data$MentalHealth, center = TRUE, scale = TRUE)
@@ -9,7 +9,7 @@ data<-data.matrix(data)
 data_cor <- cor(data)
 corrplot(data_cor, method = "square", order = "hclust", 
          tl.col = "black", tl.srt = 30,tl.cex =0.8)
-#  Visualization
+##  Visualization
 attach(data)
 colnames(data)
 HeartDisease=as.factor(HeartDisease)
