@@ -24,7 +24,7 @@ Asthma=as.factor(Asthma)
 KidneyDisease=as.factor(KidneyDisease)
 SkinCancer=as.factor(SkinCancer)
 detach(data)
-#绘制因子型变量与心脏病之间的交叉描述性统计
+## Generate cross-tabulated descriptive statistics for categorical variables and their relationship with heart disease
 P1=ggplot(data,mapping=aes(x=as.factor(Smoking),fill=as.factor(HeartDisease)))+
   geom_bar(position="dodge")+
   scale_fill_manual(values=c("#B5B5B5","#4A4A4A"))+
@@ -70,8 +70,8 @@ P9=ggplot(data,mapping=aes(x=as.factor(KidneyDisease),fill=as.factor(HeartDiseas
   scale_fill_manual(values=c("#B5B5B5","#4A4A4A"))+
   guides(fill = guide_legend(title = NULL))+
   labs(x='KidneyDisease')
-grid.arrange(grobs=list(P1,P2,P3,P4,P5,P6,P7,P8,P9),ncol=3,bottom='因子型变量与心脏病之间的交叉描述性统计')
-#画心脏病患者情况的饼图
+grid.arrange(grobs=list(P1,P2,P3,P4,P5,P6,P7,P8,P9),ncol=3,bottom='Generate cross-tabulated descriptive statistics for categorical variables and their relationship with heart disease')
+# pie chart about heart disease patients
 blank_theme <- theme_minimal()+
   theme(
     axis.title.x =element_blank() ,
@@ -90,7 +90,7 @@ P10<-ggplot(data=datarose,mapping=aes(x="HeartDisease",fill=as.factor(HeartDisea
   guides(fill = guide_legend(title = NULL))+
   blank_theme+
   geom_text(stat="count",aes(label = ''), size=4, position=position_stack(vjust = 0.5))
-#绘制BMI的小提琴图  
+# violin chart about BMI 
 P11<-ggplot(data=data,mapping=aes(x=factor(HeartDisease),y=BMI))+
   geom_violin(fill='gray',scale='count')+
   geom_boxplot(width=0.2,outlier.colour = 'red')+
