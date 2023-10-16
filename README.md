@@ -1,4 +1,4 @@
-# A-predictive-model-for-heart-disease
+# A variable selection model for heart disease
 ### Data Source
 Utilized a total of 319,795 survey data from the Centers for Disease Control and Prevention (CDC) in the United States over the past few years for the study.
 
